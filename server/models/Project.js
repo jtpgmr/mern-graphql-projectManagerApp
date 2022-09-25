@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const ProjectSchema = new mongoose.Schema({
   name: { type: String },
-  status: { type: String },
-  description: {
+  description: { type: String },
+  status: {
     type: String,
     enum: ["Not Started", "In Progress", "Completed"],
   },
