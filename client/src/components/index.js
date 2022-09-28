@@ -1,4 +1,7 @@
 export { default as NavBar } from "./NavBar"
 export { default as Clients } from "./Clients"
+export { default as ClientInfo } from "./ClientInfo"
 export { default as AddClientModal } from "./AddClientModal"
+export { default as AddProjectModal } from "./AddProjectModal"
 export { default as Projects } from "./Projects"
+export { default as DeleteProjectButton } from "./DeleteProjectButton"

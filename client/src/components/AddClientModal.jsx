@@ -10,11 +10,6 @@ const AddClientModal = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
-  // useMutations works by taking in a certain mutation object
-  // and which variables we want to pass through the object
-  // the cache is then updated with the data from the mutation
-  // after the cache is updated, this update is then reflected on the UI
-  // via writeQuery
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: {name, email, phone},
     update(cache, { data: { addClient }}) {
@@ -23,7 +18,7 @@ const AddClientModal = () => {
       });
       cache.writeQuery({
         query: GET_CLIENTS,
-        data: { clients: clients.concat([addClient])
+        data: { clients: [...clients, addClient]
         }
       })
     }
@@ -37,15 +32,6 @@ const AddClientModal = () => {
 
   const handleFormSubmit = (e) => {
       e.preventDefault()
-      // console.log(`
-      // name: ${name}, 
-      // email: ${email}, 
-      // phone: ${phone}`
-      // )
-
-      if (name === "" || email === "" || phone === "") {
-        return alert("Please fill in all of the fields");
-      }
 
       addClient(name, email, phone)
 
@@ -56,7 +42,7 @@ const AddClientModal = () => {
     <>
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-outline-primary"
         data-bs-toggle="modal"
         data-bs-target="#addClient"
       >
@@ -77,14 +63,15 @@ const AddClientModal = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="addClientLabel">
-                Add Client
+                New Client
               </h5>
               <button
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              ></button>
+                onClick={() => clear()}
+              />
             </div>
             <div className="modal-body">
               <form onSubmit={handleFormSubmit}>
@@ -117,7 +104,9 @@ const AddClientModal = () => {
 
                 <button type="submit"
                 className="btn btn-primary"
-                data-bs-dismiss="modal">
+                data-bs-dismiss="modal"
+                disabled={!name || !email || !phone}
+                >
                   Submit
                 </button>
               </form>

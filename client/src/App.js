@@ -6,7 +6,7 @@ import {
 } from "react-router-dom"
 
 import { NavBar } from "./components";
-import { Home } from "./pages/";
+import { Home, NotFound, Project } from "./pages/";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -41,6 +41,8 @@ const App = () => {
     <div className="container">
       <Routes>
         <Route exact path="/" element={<Home />}/>
+        <Route path="/projects/:id" element={<Project />} />
+        <Route path="*" element={<NotFound />}/>
       </Routes>
     </div>
     </Router>
