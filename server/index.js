@@ -5,7 +5,7 @@ import express from "express";
 import { graphqlHTTP } from "express-graphql";
 
 import connectDB from "./config/db.js";
-import schema from "./schema/schema.js";
+import schema from "./api/schema.js"
 
 dotenv.config();
 
